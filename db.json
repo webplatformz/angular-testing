@@ -1,0 +1,46 @@
+{
+  "salons": [
+    {
+      "id": 1,
+      "name": "Haarige Zeiten",
+      "genderServed": "both",
+      "owner": {
+        "lastName": "Meier",
+        "firstName": "Thomas"
+      },
+      "belongsToChain": false,
+      "address": {
+        "street": "Bahnhofstrasse",
+        "houseNumber": "43a",
+        "city": "Luzern",
+        "zipCode": "6003",
+        "country": "CH"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Rostige Schere",
+      "genderServed": "male",
+      "belongsToChain": true,
+      "address": {
+        "street": "Wiesenstrasse",
+        "houseNumber": "1",
+        "city": "Schlieren",
+        "zipCode": "8952",
+        "country": "CH"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Trudis Badewanne",
+      "genderServed": "female",
+      "belongsToChain": false,
+      "address": {
+        "street": "Egg",
+        "city": "Hinterfultigen",
+        "zipCode": "3089",
+        "country": "CH"
+      }
+    }
+  ]
+}
