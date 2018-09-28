@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.salon {
+  display: flex;
+}
+
+.salon>div {
+  width: 200px;
+}

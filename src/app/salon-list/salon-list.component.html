@@ -1,0 +1,10 @@
+<div *ngIf="errorLoadingSalons">Beim Laden der Coiffeurgeschäfte ist ein Fehler aufgetreten</div>
+
+<ng-container *ngIf="salons">
+  <div *ngFor="let salon of salons" class="salon">
+    <div>{{salon.name}}</div>
+    <div>{{salon.genderServed}}</div>
+    <div>{{salon.owner?.lastName}}</div>
+    <div>{{salon.owner?.firstName}}</div>
+  </div>
+</ng-container>
