@@ -9,3 +9,18 @@
 .salon>div {
   width: 200px;
 }
+
+form {
+  display: block;
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.error {
+  margin-bottom: 20px;
+  color: red;
+}
