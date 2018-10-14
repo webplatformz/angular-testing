@@ -13,12 +13,13 @@ export class SalonListComponent implements OnInit {
   allSalons: Salon[];
   displayedSalons: Salon[];
   errorLoadingSalons = false;
+  selectedSalonId: number;
 
   constructor(private fb: FormBuilder, private salonService: SalonService) {
     this.searchForm = fb.group({
       'salonName': [],
       'gender': []
-    })
+    });
   }
 
   ngOnInit() {
@@ -31,19 +32,24 @@ export class SalonListComponent implements OnInit {
         this.errorLoadingSalons = true;
         console.log(error);
       }
-    )
+    );
   }
 
   onSearch() {
-    let salonName = this.searchForm.controls.salonName.value;
-    let gender = this.searchForm.controls.gender.value;
+    this.selectedSalonId = undefined;
+    const salonName = this.searchForm.controls.salonName.value;
+    const gender = this.searchForm.controls.gender.value;
     this.applyFilter(salonName, gender);
+  }
+
+  showSalonDetails(salonId: number) {
+    this.selectedSalonId = salonId;
   }
 
   private applyFilter(salonName, gender) {
     this.displayedSalons = this.allSalons.filter(salon => {
-      let salonNameMatch = !salonName || salon.name.includes(salonName);
-      let genderMatch = !gender || salon.genderServed === gender || salon.genderServed === 'both';
+      const salonNameMatch = !salonName || salon.name.includes(salonName);
+      const genderMatch = !gender || salon.genderServed === gender || salon.genderServed === 'both';
       return salonNameMatch && genderMatch;
     });
   }

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SalonListComponent } from './salon-list.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SalonListComponent} from './salon-list.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('SalonListComponent', () => {
   let component: SalonListComponent;
@@ -8,9 +8,10 @@ describe('SalonListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SalonListComponent ]
+      declarations: [SalonListComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

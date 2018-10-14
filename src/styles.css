@@ -1,4 +1,8 @@
 .html, body {
-  width: 100%;
+  font-family: "AA Zuehlke", Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #fbfcfb;
+  margin: 0;
+  padding: 0;
 }
 
