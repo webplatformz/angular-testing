@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {SalonService} from '../salon.service';
-import {Salon} from '../salon';
-import {FormBuilder} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { SalonService } from '../salon.service';
+import { Salon } from '../salon';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-salon-list',

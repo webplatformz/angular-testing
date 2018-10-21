@@ -11,7 +11,9 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
+  // chromeDriver: './driver/chromedriver_2.43_win32.exe', // chromedriver_2.43_linux64, chromedriver_2.43_mac64
   directConnect: true,
+  SELENIUM_PROMISE_MANAGER: false,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {

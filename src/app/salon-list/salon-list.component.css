@@ -13,13 +13,13 @@
   font-size: 12px;
 }
 
-.list-header, .salon-info {
+.list-header, .salon-header {
   display: flex;
   flex-direction: row;
   padding: 10px;
 }
 
-.list-header > div, .salon-info > div {
+.list-header > div, .salon-header > div {
   width: 33%;
 }
 
@@ -27,17 +27,17 @@
   margin-top: 5px;
 }
 
-.salon-info {
+.salon-header {
   color: white;
   background-color: #575d62;
 }
 
-.salon-info:hover {
+.salon-header:hover {
   background-color: #969696;
   cursor: pointer;
 }
 
-.salon-info.selected {
+.salon-header.selected {
   background-color: #ff820a;
 }
 

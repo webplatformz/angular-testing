@@ -1,4 +1,4 @@
-.details-container {
+:host {
   display: flex;
   flex-direction: row;
   padding: 10px;

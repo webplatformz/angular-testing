@@ -1,14 +1,12 @@
-<div class="details-container">
-  <div class="details-info">
-    <h4>Salon {{salon.name}}</h4>
-    Owner: {{salon.owner?.firstName}} {{salon.owner?.lastName}}<br>
-    Served genders: {{salon.genderServed}}<br>
-    Belongs to chain: {{salon.belongsToChain ? 'yes' : 'no'}}<br>
-  </div>
-  <div class="details-address">
-    <h4>Address</h4>
-    {{salon.name}}<br>
-    {{salon.address.street}} {{salon.address.houseNumber}}<br>
-    {{salon.address.country}}-{{salon.address.zipCode}} {{salon.address.city}}
-  </div>
+<div class="details-info">
+  <h4>Salon {{salon.name}}</h4>
+  Owner: {{salon.owner?.firstName}} {{salon.owner?.lastName}}<br>
+  Served genders: {{salon.genderServed}}<br>
+  Belongs to chain: {{salon.belongsToChain ? 'yes' : 'no'}}<br>
+</div>
+<div class="details-address">
+  <h4>Address</h4>
+  {{salon.name}}<br>
+  {{salon.address.street}} {{salon.address.houseNumber}}<br>
+  {{salon.address.country}}-{{salon.address.zipCode}} {{salon.address.city}}
 </div>
