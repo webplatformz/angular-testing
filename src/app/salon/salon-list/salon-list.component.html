@@ -1,5 +1,6 @@
 <div class="search-form">
-  <img src="../../assets/scissor-and-comb.svg" width="50" height="50" class="logo">
+  <!--suppress CheckImageSize -->
+  <img src="../../../assets/scissor-and-comb.svg" width="50" height="50" class="logo">
   <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     <label>Salon <input [formControl]="searchForm.controls.salonName" type="text"></label>
     <label><input [formControl]="searchForm.controls.gender" type="radio" value="female">&nbsp;female</label>
@@ -9,7 +10,7 @@
   </form>
 </div>
 
-<div *ngIf="errorLoadingSalons" class="error">There was an error loading the salons!</div>
+<div *ngIf="salonsLoadingError$ | async" class="error">There was an error loading the salons!</div>
 
 <div *ngIf="displayedSalons" class="salons-list">
   <div class="list-header">
@@ -23,6 +24,9 @@
       <div>{{salon.genderServed}}</div>
       <div>{{salon.address.city}}</div>
     </div>
-    <app-salon-details *ngIf="selectedSalonId === salon.id" [salon]="salon"></app-salon-details>
+    <app-salon-details *ngIf="salon.id == salonDetails?.id" [salonDetails]="salonDetails"></app-salon-details>
+    <div *ngIf="selectedSalonId === salon.id && salonDetailsLoadingError$ | async" class="error">
+      There was an error loading the salon details!
+    </div>
   </div>
 </div>

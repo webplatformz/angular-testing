@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Salon} from '../salon';
+import {SalonDetails} from '../model/salon-details';
 
 @Component({
   selector: 'app-salon-details',
@@ -8,7 +8,7 @@ import {Salon} from '../salon';
 })
 export class SalonDetailsComponent {
 
-  @Input() salon: Salon;
+  @Input() salonDetails: SalonDetails;
 
   constructor() { }
 

@@ -1,28 +1,48 @@
-import {Salon} from '../../../salon';
+import {Salon} from '../../../salon/model/salon';
 import {SalonActions, SalonActionTypes} from './salon.actions';
+import {SalonDetails} from '../../../salon/model/salon-details';
 
 export interface SalonState {
   salons: Salon[];
-  isLoading: boolean;
-  isLoadingError: boolean;
-  isLoaded: boolean;
+  salonDetails?: SalonDetails;
+  areSalonsLoading: boolean;
+  isSalonsLoadingError: boolean;
+  areSalonsLoaded: boolean;
+  areSalonDetailsLoading: boolean;
+  isSalonDetailsLoadingError: boolean;
+  areSalonDetailsLoaded: boolean;
 }
 
 export const initialState: SalonState = {
   salons: [],
-  isLoading: false,
-  isLoadingError: false,
-  isLoaded: false
+  areSalonsLoading: false,
+  isSalonsLoadingError: false,
+  areSalonsLoaded: false,
+  areSalonDetailsLoading: false,
+  isSalonDetailsLoadingError: false,
+  areSalonDetailsLoaded: false
 };
 
 export function salonReducer(state = initialState, action: SalonActions): SalonState {
   switch (action.type) {
+    case SalonActionTypes.LoadSalonDetails:
+      return {...state, areSalonDetailsLoading: true, areSalonDetailsLoaded: false};
+    case SalonActionTypes.LoadSalonDetailsSuccess:
+      return {...state, areSalonDetailsLoading: false, areSalonDetailsLoaded: true, salonDetails: action.salonDetails};
+    case SalonActionTypes.LoadSalonDetailsFailure:
+      return {...state, areSalonDetailsLoading: false, isSalonDetailsLoadingError: true, salonDetails: null};
     case SalonActionTypes.LoadSalons:
-      return {...state, isLoading: true, isLoaded: false};
+      return {...state, areSalonsLoading: true, areSalonsLoaded: false};
     case SalonActionTypes.LoadSalonsSuccess:
-      return {...state, isLoading: false, isLoaded: true, isLoadingError: false, salons: action.salons};
+      return {
+        ...state,
+        areSalonsLoading: false,
+        areSalonsLoaded: true,
+        isSalonsLoadingError: false,
+        salons: action.salons
+      };
     case SalonActionTypes.LoadSalonsFailure:
-      return {...state, isLoading: false, isLoadingError: true};
+      return {...state, areSalonsLoading: false, isSalonsLoadingError: true, salons: []};
     default:
       return state;
   }

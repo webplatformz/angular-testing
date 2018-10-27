@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SalonService} from '../salon.service';
-import {Salon} from '../salon';
+import {SalonService} from '../api/salon.service';
+import {Salon} from '../model/salon';
 import {FormBuilder} from '@angular/forms';
-import {SalonStore} from '../core/store/salon/salon.store';
+import {SalonStore} from '../../core/store/salon/salon.store';
 import {takeWhile} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {SalonDetails} from '../model/salon-details';
 
 @Component({
   selector: 'app-salon-list',
@@ -12,21 +14,26 @@ import {takeWhile} from 'rxjs/operators';
 })
 export class SalonListComponent implements OnInit, OnDestroy {
   searchForm;
-  allSalons: Salon[];
+
   displayedSalons: Salon[];
-  errorLoadingSalons = false;
+  salonDetails: SalonDetails;
+  salonsLoadingError$: Observable<boolean>;
+  salonDetailsLoadingError$: Observable<boolean>;
   selectedSalonId: number;
 
   private alive = true;
+  private allSalons: Salon[];
 
   constructor(private fb: FormBuilder, private salonService: SalonService, private salonStore: SalonStore) {
     this.salonStore.getSalons$().pipe(takeWhile(() => this.alive)).subscribe(salons => {
       this.allSalons = salons;
       this.displayedSalons = salons;
     });
-    this.salonStore.getSalonLoadingError$().pipe(takeWhile(() => this.alive)).subscribe(isLoadingError => {
-      this.errorLoadingSalons = isLoadingError;
+    this.salonStore.getSalonDetails$().pipe(takeWhile(() => this.alive)).subscribe(salonDetails => {
+      this.salonDetails = salonDetails;
     });
+    this.salonsLoadingError$ = this.salonStore.getSalonsLoadingError$();
+    this.salonDetailsLoadingError$ = this.salonStore.getSalonDetailsLoadingError$();
     this.searchForm = fb.group({
       'salonName': [],
       'gender': []
@@ -34,7 +41,7 @@ export class SalonListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.salonStore.loadSalons$();
+    this.salonStore.loadSalonsAndFirstSalonDetails$();
   }
 
   ngOnDestroy(): void {
@@ -50,6 +57,7 @@ export class SalonListComponent implements OnInit, OnDestroy {
 
   showSalonDetails(salonId: number) {
     this.selectedSalonId = salonId;
+    this.salonStore.loadSalonDetails$(salonId);
   }
 
   private applyFilter(salonName, gender) {

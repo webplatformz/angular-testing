@@ -1,10 +1,18 @@
 import {SalonState} from './salon.reducer';
 import {select, Store} from '@ngrx/store';
-import {LoadSalons} from './salon.actions';
+import {LoadSalonDetails, LoadSalons} from './salon.actions';
 import {Observable} from 'rxjs';
-import {Salon} from '../../../salon';
+import {Salon} from '../../../salon/model/salon';
 import {Injectable} from '@angular/core';
-import {selectSalonLoadingError, selectSalons} from './salon.selectors';
+import {
+  selectSalonDetails,
+  selectSalonDetailsLoadingError,
+  selectSalons,
+  selectSalonsLoaded,
+  selectSalonsLoadingError
+} from './salon.selectors';
+import {distinctUntilChanged, filter, take, withLatestFrom} from 'rxjs/operators';
+import {SalonDetails} from '../../../salon/model/salon-details';
 
 @Injectable()
 export class SalonStore {
@@ -16,11 +24,37 @@ export class SalonStore {
     return this.store.pipe(select(selectSalons));
   }
 
-  getSalonLoadingError$(): Observable<boolean> {
-    return this.store.pipe(select(selectSalonLoadingError));
+  getSalonDetails$(): Observable<SalonDetails> {
+    return this.store.pipe(select(selectSalonDetails));
   }
 
-  loadSalons$() {
+  getSalonDetailsLoadingError$(): Observable<boolean> {
+    return this.store.pipe(select(selectSalonDetailsLoadingError));
+  }
+
+  getSalonsLoadingError$(): Observable<boolean> {
+    return this.store.pipe(select(selectSalonsLoadingError));
+  }
+
+  loadSalonsAndFirstSalonDetails$() {
     this.store.dispatch(new LoadSalons());
+    this.areSalonsLoaded$().pipe(
+      distinctUntilChanged(),
+      filter(isLoaded => isLoaded),
+      take(1),
+      withLatestFrom(this.getSalons$())
+    ).subscribe(([isLoaded, salons]) => {
+      if (salons.length > 0) {
+        this.loadSalonDetails$(salons[0].id);
+      }
+    });
+  }
+
+  loadSalonDetails$(salonId: number) {
+    this.store.dispatch(new LoadSalonDetails(salonId));
+  }
+
+  private areSalonsLoaded$(): Observable<boolean> {
+    return this.store.pipe(select(selectSalonsLoaded));
   }
 }
