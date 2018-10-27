@@ -8,7 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "protractor e2e/protractor.conf.js"
+    "e2e": "protractor e2e/protractor.conf.js",
+    "webdriver-update": "node ./node_modules/protractor/bin/webdriver-manager update --chrome"
   },
   "private": true,
   "dependencies": {
