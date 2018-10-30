@@ -6,6 +6,7 @@ import {SalonListComponent} from './salon-list/salon-list.component';
 import {SalonDetailsComponent} from './salon-details/salon-details.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {SalonService} from './salon.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SalonService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

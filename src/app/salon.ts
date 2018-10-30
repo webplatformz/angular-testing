@@ -8,4 +8,5 @@ export class Salon {
   owner?: Person;
   belongsToChain: boolean;
   address: Address;
+  shiny?: boolean;
 }
