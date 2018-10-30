@@ -1,13 +1,4 @@
-<div class="search-form">
-  <img src="../../assets/scissor-and-comb.svg" width="50" height="50" class="logo">
-  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-    <label>Salon <input [formControl]="searchForm.controls.salonName" type="text"></label>
-    <label><input [formControl]="searchForm.controls.gender" type="radio" value="female">&nbsp;female</label>
-    <label><input [formControl]="searchForm.controls.gender" type="radio" value="male">&nbsp;male</label>
-    <label><input [formControl]="searchForm.controls.gender" type="radio" value="both">&nbsp;both</label>
-    <button type="submit">Search</button>
-  </form>
-</div>
+<app-filter (updateFilterCriteria)="onUpdatedFilterCriteria($event)"></app-filter>
 
 <div *ngIf="errorLoadingSalons" class="error">There was an error loading the salons!</div>
 

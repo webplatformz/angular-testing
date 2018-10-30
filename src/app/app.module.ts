@@ -6,12 +6,14 @@ import {SalonListComponent} from './salon-list/salon-list.component';
 import {SalonDetailsComponent} from './salon-details/salon-details.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SalonListComponent,
-    SalonDetailsComponent
+    SalonDetailsComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
