@@ -1,0 +1,20 @@
+:host {
+  width: 100%;
+}
+
+.search-form {
+  width: 100%;
+  padding: 5px 0;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #484e54;
+}
+
+label, img {
+  display: inline-block;
+  margin-right: 20px;
+}

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SalonService } from '../salon.service';
-import { Salon } from '../salon';
-import { FormBuilder } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {SalonService} from '../salon.service';
+import {Salon} from '../salon';
+import {FilterCriteria} from '../filter-criteria';
 
 @Component({
   selector: 'app-salon-list',
@@ -9,17 +9,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./salon-list.component.css']
 })
 export class SalonListComponent implements OnInit {
-  searchForm;
   allSalons: Salon[];
   displayedSalons: Salon[];
   errorLoadingSalons = false;
   selectedSalonId: number;
 
-  constructor(private fb: FormBuilder, private salonService: SalonService) {
-    this.searchForm = fb.group({
-      'salonName': [],
-      'gender': []
-    });
+  constructor(private salonService: SalonService) {
   }
 
   ngOnInit() {
@@ -35,21 +30,16 @@ export class SalonListComponent implements OnInit {
     );
   }
 
-  onSearch() {
-    this.selectedSalonId = undefined;
-    const salonName = this.searchForm.controls.salonName.value;
-    const gender = this.searchForm.controls.gender.value;
-    this.applyFilter(salonName, gender);
-  }
-
   showSalonDetails(salonId: number) {
     this.selectedSalonId = salonId;
   }
 
-  private applyFilter(salonName, gender) {
+  onUpdatedFilterCriteria(filterCriteria: FilterCriteria) {
+    this.selectedSalonId = undefined;
+
     this.displayedSalons = this.allSalons.filter(salon => {
-      const salonNameMatch = !salonName || salon.name.includes(salonName);
-      const genderMatch = !gender || salon.genderServed === gender || salon.genderServed === 'both';
+      const salonNameMatch = !filterCriteria.salonName || salon.name.includes(filterCriteria.salonName);
+      const genderMatch = !filterCriteria.gender || salon.genderServed === filterCriteria.gender || salon.genderServed === 'both';
       return salonNameMatch && genderMatch;
     });
   }
