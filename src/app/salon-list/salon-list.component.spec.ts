@@ -55,7 +55,7 @@ fdescribe('SalonListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should apply the filter correctly', () => {
+  it('should apply the filter correctly', async(() => {
 
     const nativeElement = fixture.nativeElement;
     let inputElement = nativeElement.querySelector('#salon-name-input');
@@ -65,10 +65,12 @@ fdescribe('SalonListComponent', () => {
 
     nativeElement.querySelector('#search-form-submit').click();
 
-    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
 
-    const salonHeaders = fixture.debugElement.queryAll(By.css('.salon-header'));
-    expect(salonHeaders.length).toBe(1);
-    expect(salonHeaders[0].childNodes[0].nativeNode.textContent).toBe('Salon Milde Bleiche');
-  });
+      const salonHeaders = fixture.debugElement.queryAll(By.css('.salon-header'));
+      expect(salonHeaders.length).toBe(1);
+      expect(salonHeaders[0].childNodes[0].nativeNode.textContent).toBe('Salon Milde Bleiche');
+    });
+  }));
 });
